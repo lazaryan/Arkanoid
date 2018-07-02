@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Arkanoid</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+
+		.table{
+			position: absolute;
+			top: 10px;
+			left: 10px;
+		}
+
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="640" height="480"></canvas>
+	<div class="table">
+		<p>Счет игрока: <b id="score">0</b></p>
+		<p>Hp: <b id="hp">3</b></p>
+	</div>
+
+	<script src="keys.js"></script>
+	<script src="engine.js"></script>
+	<script src="graph.js"></script>
+	<script src="player.js"></script>
+	<script src="grid.js"></script>
+	<script src="ball.js"></script>
+
+	<script type="text/javascript">
+		init();
+
+		let map = {
+			color: '#a22',
+			width: 60,
+			height: 30,
+			offset: 5,
+
+			tiles : [
+				[1, 1, 0, 1, 1],
+				[1, 0, 1, 1, 1],
+				[0, 1, 1, 0, 1]
+			]
+		}
+
+		grid.create(map);
+		//grid.generation(5, 60, 30, '#a22');
+		player.init(width / 2, 200, '#DDF705');
+		ball.init(player.x + Math.ceil(player.width / 2), player.y - 7, 7, '#274BFF');
+
+		let game = function() {
+			fillAll('#8BDAEB');
+
+			grid.draw();
+
+			ball.collision();
+			ball.move();
+			ball.draw();
+
+			player.move();
+			player.draw();
+		}
+
+		let menu = function () {
+			fillAll('#8BDAEB');
+
+			grid.draw();
+			ball.draw();
+			player.draw();
+
+			if(isAnyKeyDown()){
+				setGame(game);
+			}
+		}
+
+		startGame(menu);
+	</script>
+</body>
+</html>
