@@ -43,6 +43,7 @@ let ball = {
 				this.speedY += 0.1;
 				player.speed += 0.1;
 				player.updScore(1);
+				this.changeColor();
 			}
 		}
 
@@ -83,5 +84,9 @@ let ball = {
 				ball.init(player.x + Math.ceil(player.width / 2), player.y - 7, 7, '#274BFF');
 			}
 		}
+	},
+
+	changeColor: function () {
+  		this.color = ('#' + Math.floor(Math.random() * 16777215).toString(16));
 	}
 };

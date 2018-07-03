@@ -25,10 +25,10 @@ let player = {
 	},
 
 	move : function() {
-		if(isKeyDown('LEFT') || isKeyDown('A')){
+		if((isKeyDown('LEFT') || isKeyDown('A')) && this.x >= 0){
 			this.x -= this.speed;
 			this.dx = -1;
-		} else if(isKeyDown('RIGHT') || isKeyDown('D')){
+		} else if((isKeyDown('RIGHT') || isKeyDown('D')) && (this.x + this.width) <= width){
 			this.x += this.speed;
 			this.dx = 1;
 		} else{
