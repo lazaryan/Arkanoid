@@ -9,76 +9,77 @@
 			padding: 0;
 		}
 
-		.table{
+		.tabel{
 			position: absolute;
 			top: 10px;
 			left: 10px;
+			border: 1px solid rgba(0, 0, 0, .5);
+			line-height: 30px;
+			padding: 0 20px;
 		}
 
+		.tabel__text{
+			font-weight: bold;
+			text-align: right;
+			float: right;
+		}
 	</style>
 </head>
 <body>
 	<canvas id="canvas" width="640" height="480"></canvas>
-	<div class="table">
-		<p>Счет игрока: <b id="score">0</b></p>
-		<p>Hp: <b id="hp">3</b></p>
+	<div class="tabel js-tabel">
+		<p class="tabel__score">Счет: <span class="tabel__text" id="score"></span></p>
+		<p class="tabel__hp">Жизни: <span class="tabel__text" id="hp"></span></p>
+		<p class="tabel__level">Уровень: <span class="tabel__text" id="level"></span></p>
 	</div>
 
 	<script src="keys.js"></script>
-	<script src="engine.js"></script>
 	<script src="graph.js"></script>
+	<script src="engine.js"></script>
 	<script src="player.js"></script>
-	<script src="grid.js"></script>
 	<script src="ball.js"></script>
+	<script src="grid.js"></script>
+	<script src="tabel.js"></script>
 
 	<script type="text/javascript">
 		init();
+		tabel.getDate();
 
-		let map = {
+		/*let map = {
 			color: '#a22',
 			width: 60,
 			height: 30,
 			offset: 5,
 
 			tiles : [
-				[1, 1, 0, 1, 1, 0, 0, 1, 1],
-				[1, 0, 1, 1, 1, 1, 1, 0],
-				[0, 1, 1, 0, 1, 0, 1,1, 1],
-				[0, 1, 1, 0, 1, 1, 1, 0, 1]
+				[1, 1, 1, 1, 1, 1, 0, 1, 1],
+				[1, 1, 0, 1, 1, 1, 1, 1, 1],
+				[1, 1, 0, 1, 1, 1, 1, 1, 1],
+				[1, 1, 1, 1, 1, 0, 1, 1, 1]
 			]
-		}
+		};*/
 
-		grid.create(map);
-		//grid.generation(5, 60, 30, '#a22');
-		player.init(width / 2, 200, '#DDF705');
-		ball.init(player.x + Math.ceil(player.width / 2), player.y - 7, 7, '#274BFF');
+		player.init(Math.ceil(width / 2) - 50, 100, '#DDF705');
+		ball.init(player.x + Math.ceil(player.width / 2), player.y - 7, 7, '#0E0EFB');
 
-		let game = function() {
+		///grid.create(map);
+		grid.generation(4, 60, 30, '#a22');
+
+
+		let game = function () {
 			fillAll('#8BDAEB');
 
-			grid.draw();
-
-			ball.collision();
-			ball.move();
-			ball.draw();
-
+			player.draw();
 			player.move();
-			player.draw();
-		}
 
-		let menu = function () {
-			fillAll('#8BDAEB');
+			ball.draw();
+			ball.move();
+			ball.collision();
 
 			grid.draw();
-			ball.draw();
-			player.draw();
-
-			if(isAnyKeyDown()){
-				setGame(game);
-			}
 		}
 
-		startGame(menu);
+		startGame(game);
 	</script>
 </body>
 </html>

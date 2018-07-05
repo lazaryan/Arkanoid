@@ -1,10 +1,23 @@
 let grid = {
-	nodes : [],
+	nodes: [],
+	map: {
+		color: '#a22',
+		width: 60,
+		height: 30,
+		offset: 5,
+		tiles: []
+	},
 
-	add: function(x, y, w, h, c) {
+	add: function (x, y, w, h, c) {
 		let tmp = new _Enemy(x, y, w, h, c);
 
 		this.nodes.push(tmp);
+	},
+
+	draw: function() {
+		for(en in this.nodes){
+			this.nodes[en].draw();
+		}
 	},
 
 	generation: function(count, w, h, color) {
@@ -16,11 +29,16 @@ let grid = {
 			dY = dAllW;
 
 		for(let i = 0; i < count; i++){
+			let tmp = [];
+
 			for(let j = 0; j < dCountX; j++){
 				if( j == 0) dX += dAllW - Math.ceil(dW / 2);
 				this.add(dX, dY, w, h, color);
 				dX += w + dW;
+				tmp.push(1);
 			}
+			this.map.tiles.push(tmp);
+
 			dY += h + dW;
 			dX = dW;
 		}
@@ -41,6 +59,23 @@ let grid = {
 				}
 			}
 		}
+
+		this.map = map;
+	},
+
+	generationMap: function () {
+		let length = this.map.tiles[0].length;
+		let arr = [];
+
+		for(let i = 0; i < length; i++){
+			let tmp = Math.random();
+
+			(tmp > 0.5) ? tmp = 1 : tmp = 0;
+
+			arr.push(tmp);
+		}
+
+		this.map.tiles.splice(0, 0, arr);
 	},
 
 	clear: function () {
@@ -49,14 +84,22 @@ let grid = {
 
 	destroy: function (id) {
 		this.nodes.splice(id, 1);
-	},
 
-	draw : function() {
-		for(en in this.nodes){
-			this.nodes[en].draw();
+		let id_new = -1;
+
+		for(let t1 in this.map.tiles){
+			for(let t2 in this.map.tiles[t1]){
+				if(this.map.tiles[t1][t2]){
+					id_new++;
+
+					if(id_new == id){
+						this.map.tiles[t1][t2] = 0;
+					}
+				}
+			}
 		}
 	}
-};
+}
 
 let _Enemy = function(x, y, w, h, color){
 	this.x = x;

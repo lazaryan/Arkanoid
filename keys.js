@@ -4,7 +4,8 @@ let keys = {
 	'A' 	: 65,
 	'D' 	: 68,
 	'LEFT' 	: 37,
-	'RIGHT'	: 39
+	'RIGHT'	: 39,
+	'SHIFT' : 32
 };
 
 let keyDown = {};
