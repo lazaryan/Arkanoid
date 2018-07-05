@@ -18,6 +18,10 @@ let clearKey = function (keyCode){
 	keyDown[keyCode] = false;
 }
 
+let clearKeys = function () {
+	keyDown = {};
+}
+
 let isKeyDown = function (keyName){
 	return keyDown[keys[keyName]] == true;
 }

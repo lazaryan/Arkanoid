@@ -5,7 +5,7 @@ let ball = {
 	x: 0,
 	y: 0,
 	radius: 7,
-	dx : -1,
+	dx : 1,
 	dy : -1,
 
 	init: function (x, y, r, c) {
@@ -43,16 +43,28 @@ let ball = {
 				grid.destroy(i);
 				tabel.upScore(1);
 
-				if(tabel.score % 7 == 0){
-					grid.generationMap();
-					grid.clear();
-					grid.create(grid.map);
-				}
+				if(grid.nodes.length == 0){
+					gameClear();
 
-				if(tabel.score % 10 == 0){
-					tabel.upLevel(1);
-					this.speedY += 0.2;
-					player.speed += 0.3;
+					tabel.win();
+				} else{
+					if(tabel.score % 7 == 0){
+						grid.generationMap();
+						grid.clear();
+						grid.create(grid.map);
+
+						if(grid.nodes[grid.nodes.length - 1].y + grid.nodes[0].height >= player.y){
+							gameClear();
+							tabel.loss();
+							break;
+						}
+					}
+
+					if(tabel.score % 10 == 0){
+						tabel.upLevel(1);
+						this.speedY += 0.2;
+						player.speed += 0.3;
+					}
 				}
 			}
 		}
@@ -69,6 +81,12 @@ let ball = {
 			this.init(player.x + Math.ceil(player.width / 2), player.y - this.radius, this.radius, this.color);
 			player.active = false;
 			tabel.updHp(1);
+
+			if(tabel.hp <= 0){
+				gameClear();
+
+				tabel.loss();
+			}
 		}
 
 		if(isCollision(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2,
@@ -87,6 +105,13 @@ let ball = {
 
 			this.dx = player.dx || this.dx;
 		}
+	},
+
+	clear: function () {
+		this.speedX = 1;
+		this.speedY = 1.4;
+		this.dx	= 1;
+		this.dy	= -1;
 	},
 
 	changeRandomColor: function () {

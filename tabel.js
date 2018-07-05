@@ -18,9 +18,25 @@ let tabel = {
 		document.querySelector('#hp').innerHTML 	= this.hp;
 	},
 
-	getDate: function (id_score, id_hp) {
+	getDate: function () {
 		document.querySelector('#hp').innerHTML 	= this.hp;
 		document.querySelector('#score').innerHTML 	= this.score;
 		document.querySelector('#level').innerHTML 	= this.level;
+	},
+
+	win: function() {
+		alert('Победа');
+	},
+
+	loss: function () {
+		alert('Проигрыш');
+	},
+
+	clear: function () {
+		this.score = 0;
+		this.hp = 3;
+		this.level = 1;
+
+		this.getDate();
 	}
 }
