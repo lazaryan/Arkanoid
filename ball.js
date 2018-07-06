@@ -44,6 +44,7 @@ let ball = {
 				tabel.upScore(1);
 
 				if(grid.nodes.length == 0){
+					tabel.addRecord();
 					gameClear();
 
 					tabel.win();
@@ -54,6 +55,7 @@ let ball = {
 						grid.create(grid.map);
 
 						if(grid.nodes[grid.nodes.length - 1].y + grid.nodes[0].height >= player.y){
+							tabel.addRecord();
 							gameClear();
 							tabel.loss();
 							break;
@@ -83,6 +85,7 @@ let ball = {
 			tabel.updHp(1);
 
 			if(tabel.hp <= 0){
+				tabel.addRecord();
 				gameClear();
 
 				tabel.loss();

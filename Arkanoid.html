@@ -23,6 +23,13 @@
 			text-align: right;
 			float: right;
 		}
+
+		.tabel-record{
+			position: absolute;
+			top: 10px;
+			left: 700px;
+			border: 1px solid rgba(0, 0, 0, .5);
+		}
 	</style>
 </head>
 <body>
@@ -31,6 +38,10 @@
 		<p class="tabel__score">Счет: <span class="tabel__text" id="score"></span></p>
 		<p class="tabel__hp">Жизни: <span class="tabel__text" id="hp"></span></p>
 		<p class="tabel__level">Уровень: <span class="tabel__text" id="level"></span></p>
+	</div>
+	<div class="tabel-record">
+		<h3>Таблица игр</h3>
+		<div class="js-tabel-record"></div>
 	</div>
 
 	<script src="keys.js"></script>

@@ -2,6 +2,7 @@ let tabel = {
 	score: 0,
 	hp: 3,
 	level : 1,
+	record: [],
 
 	upScore : function(score){
 		this.score += score;
@@ -38,5 +39,17 @@ let tabel = {
 		this.level = 1;
 
 		this.getDate();
+	},
+
+	addRecord: function () {
+		let tmp = {
+			"score": this.score,
+			"level": this.level
+		};
+
+		this.record.push(tmp);
+
+		let div =document.querySelector('.js-tabel-record');
+		div.innerHTML += '<p>Уровень: '+ this.record[this.record.length - 1].level +',  Счет: '+ this.record[this.record.length - 1].score +'</p>';
 	}
 }
