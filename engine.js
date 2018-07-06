@@ -35,7 +35,7 @@ let gameLoop = function () {
 let gameClear = function () {
 	grid.clear();
 	ball.clear();
-	tabel.clear();
+	this.map.tiles = [];
 	player.active = false;
 	clearKeys();
 

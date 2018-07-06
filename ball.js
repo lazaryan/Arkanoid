@@ -54,7 +54,7 @@ let ball = {
 						grid.clear();
 						grid.create(grid.map);
 
-						if(grid.nodes[grid.nodes.length - 1].y + grid.nodes[0].height >= player.y){
+						if((grid.nodes[grid.nodes.length - 1].y + grid.nodes[0].height) >= player.y){
 							tabel.addRecord();
 							gameClear();
 							tabel.loss();
